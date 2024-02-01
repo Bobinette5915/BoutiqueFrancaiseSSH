@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter - La Boutique Francaise!{% endblock %}
+
+{% block content %}
+<h1>Nous Contacter</h1>
+<p>N'hesitez pas à prendre cotact avec nos equipe, nous vous répondrons dans les plus brefs delais</p>
+<br>
+<hr>
+<br>
+{% for message in app.flashes('notice') %}
+				<div class="alert alert-info">
+					{{message}}
+				</div>
+			{% endfor %}
+<div class="row">
+    <div class="col-md-8">{{form(form)}}</div>
+    <div class="col-md-4">La Boutique Francaise
+    <hr>
+    0630393802 <br>
+    Adresse de la boutique <br>
+    CodePostale et VILLE <br>
+    LaboutiqueFrancaise.fr
+    </div>
+</div>
+
+{% endblock %}

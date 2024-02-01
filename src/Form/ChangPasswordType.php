@@ -59,6 +59,7 @@ class ChangPasswordType extends AbstractType
             ])
             ->add( 'submit', SubmitType::class,[
                 'label' => 'Mettre A Jour',
+                
             ])
         ;
     }

@@ -21,7 +21,7 @@ class AdressType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Quel nom souhaitez vous donner a votre adresse?',
                 'attr' => [
-                    'placeholder' => 'nomer votre adresse'
+                    'placeholder' => 'Nomer votre adresse'
                 ]
             ])
             ->add('firstname', TextType::class, [
@@ -38,6 +38,7 @@ class AdressType extends AbstractType
             ])
             ->add('company', TextType::class, [
                 'label' => 'Votre Societe',
+                'required' => false,
                 'attr' => [
                     'placeholder' => '(facultatif) Nom de votre Societe'
                 ]
@@ -73,10 +74,11 @@ class AdressType extends AbstractType
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter une Adresse'
-            ])
-            
-        ;
+                'label' => 'Valider',
+                'attr' => [
+                    'class' => 'btn-info w-100'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

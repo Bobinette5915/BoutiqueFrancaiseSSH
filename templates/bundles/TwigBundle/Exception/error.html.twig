@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Introuvable - La Boutique Francaise
+{% endblock %}
+
+{% block content %}
+	<div class="block-small">
+		<h2>Page Introuvable</h2>
+		<hr>
+        <p>Désolé, cette page n'existe pas ou est innaccesible pour le moment <br>
+		<hr>
+        <a href="{{path("app_home")}}" class="btn btn-info">Revenir à l'acceuil</a></p>
+	</div>
+{% endblock %}

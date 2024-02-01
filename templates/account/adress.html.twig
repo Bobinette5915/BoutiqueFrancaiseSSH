@@ -1,22 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes Adresses- La boutique Francaise!{% endblock %}
+{% block title %}Mes Adresses- La boutique Francaise!
+{% endblock %}
 
 {% block content %}
-<a href="{{path('app_account_adress_add')}}" class="btn btn-info btn-sn float-end">Ajouter une Adresse</a>
-<h1>Mes Adresses</h1>
+	<a href="{{path('app_account_adress_add')}}" class="btn btn-info btn-sn float-end">Ajouter une Adresse</a>
+	<h1>Mes Adresses</h1>
 
-C'est dans cet espace que vous pouvez gerer vos Adresses de livraisons
-<hr>
+	C'est dans cet espace que vous pouvez gerer vos Adresses de livraisons
+	<hr>
+
+	{% if app.user.adresses|length == 0 %}
+		Vous n'avez pas d'adresses enregistrées. Pour en ajouter une,
+		<a href="http://">cliquez ICI</a>
+	{% else %}
+<div class="row">
+		{% for adress in app.user.adresses %}
+
+			
+				<div class="col-md-4">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{adress.name}}</h5>
+							<p class="card-text">
+                            {{adress.adress}} <br>
+                            {{adress.postal}} -  {{adress.city}} - {{adress.country}}<br>
+                            </p>
+							<a href="{{ path('app_account_adress_edit', {'id':adress.id}) }}" >Modifier</a> | <a href="{{ path('app_account_adress_detete', {'id':adress.id}) }}" >Suprimer</a>
+						</div>
+					</div>
+				</div>
+			
+		{% endfor %}
+        </div>
+	{% endif %}
 
 
-
-
-{% if app.user.adresses|length == 0 %}
-    Vous n'avez pas d'adresses enregistrées. Pour en ajouter une, <a href="http://">cliquez ICI</a>
-{% endif %}
-<hr>
-<a href="{{path('app_account')}}">Retour à mon compte</a> <br>
-<hr>
+	<hr>
+	<a href="{{path('app_account')}}">Retour à mon compte</a>
+	<br>
+	<hr>
 {% endblock %}
- 

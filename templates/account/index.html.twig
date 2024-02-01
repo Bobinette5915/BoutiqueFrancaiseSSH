@@ -1,14 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte - La boutique Francaise!{% endblock %}
+{% block title %}Mon Compte - La boutique Francaise!
+{% endblock %}
 
 {% block content %}
-<h1>mon Compte</h1>
-Bienvenu {{app.user.firstname}} dans votre compte. <br>
-C'est dans cet espace que vous pouvez gerer vos infos perso.
-<hr>
-<a href="{{path('app_account_password')}}">-Modifier mon mot de passe</a> <br>
-<a href="{{path('app_account_adress')}}">-Ajouter / Modifier des adresses</a> <br>
--mes commandes <br>
-<hr>
+	<h1>Mon Compte</h1>
+	{% if is_granted("ROLE_ADMIN")  %}
+		<a href="/admin" class="btn btn-info">Acceder à la partie Admin</a>
+	{% endif %} <br> <br>
+	Bienvenu
+	{{app.user.firstname}}
+	dans votre compte.
+	<br>
+	C'est dans cet espace que vous pouvez gerer vos infos perso.
+	<hr>
+	
+<div class="row">
+	<div class="col-md-4">
+		<div class="account-item text-center"><a href="{{path('app_account_password')}}">Modifier mon mot de passe</a></div>
+	</div>
+	<div class="col-md-4">
+		<div class="account-item text-center"><a href="{{path('app_account_adress')}}">Ajouter / Modifier des adresses</a></div>
+	</div>
+	<div class="col-md-4">
+		<div class="account-item text-center"><a href="{{path('app_account_order')}}">Consulter mes commandes</a></div>
+	</div>
+	</div>
+	<br>
+	<hr>
 {% endblock %}

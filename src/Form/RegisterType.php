@@ -45,7 +45,7 @@ class RegisterType extends AbstractType
                 'label'=> 'Votre Email',
                 'constraints' => new Length([
                     'min'=>4,
-                    'max'=>60,
+                    'max'=>80,
                 ]),
 
                 'attr' => [

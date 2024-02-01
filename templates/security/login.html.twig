@@ -1,31 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Se Connecter - La Boutique Francaise{% endblock %}
+{% block title %}Se Connecter - La Boutique Francaise
+{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<div class="block-small">
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
+			{% for message in app.flashes('notice') %}
+				<div class="alert alert-info">
+					{{message}}
+				</div>
+			{% endfor %}
+			{% if app.user %}
+				<div class="mb-3">
+					Vous etes connécté en tant que :
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Déconnexion</a>
+				</div>
+			{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            Vous etes connécté en tant que : {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
-    {% endif %}
+			<h1 class="h3 mb-3 font-weight-normal">Merci de vous Connecter</h1>
+			<label for="inputEmail">Email</label>
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre email de connexion" required autofocus>
+			<br>
+			<label for="inputPassword">Mot de Passe</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="votre mot de passe" required>
 
-    <h1 class="h3 mb-3 font-weight-normal">Merci de vous Connecter</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="Votre email de connexion"  required autofocus>
-    <label for="inputPassword">Mot de Passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="votre mot de passe" required>
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-<hr>
-    <button class="btn btn-lg btn-primary btn-sm " type="submit">
-        connexion
-    </button>
-</form>
+			<button class="btn btn-lg btn-info w-100 mt-3" type="submit">
+				connexion
+			</button>
+			<hr>
+			<p class='text-center'>
+				<a href="{{ path('app_reset_password') }}">Mot de passe Oublié ?</a>
+			</p>
+			<p class='text-center'>Pas encore de compte?
+				<a href="{{ path('app_register') }}">Créez en un ici</a>
+			</p>
+		</form>
+	</div>
 {% endblock %}
